@@ -31,10 +31,10 @@ public class AlertRabbit {
         }
     }
 
-    public static String getProperties(String name)  {
+    public static String getProperties(String name) {
         Properties configRubbit = new Properties();
-        try {
-            configRubbit.load(new InputStreamReader(new FileInputStream("rabbit.properties")));
+        try (InputStreamReader in = new InputStreamReader(new FileInputStream("rabbit.properties"))) {
+            configRubbit.load(in);
         } catch (IOException e) {
             e.printStackTrace();
         }

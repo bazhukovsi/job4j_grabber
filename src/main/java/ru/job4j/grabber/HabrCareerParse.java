@@ -7,6 +7,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Objects;
+
 import ru.job4j.grabber.utils.HabrCareerDateTimeParser;
 
 public class HabrCareerParse {
@@ -31,6 +33,12 @@ public class HabrCareerParse {
                 System.out.printf("%s : %s : %s%n", vacancyName, dateTime, link);
             });
         }
+    }
+
+    private String retrieveDescription(String link) throws IOException {
+        Document document = Jsoup.connect(link).get();
+        Element description = document.selectFirst(".style-ugc");
+        return description.text();
     }
 }
 

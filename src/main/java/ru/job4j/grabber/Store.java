@@ -4,7 +4,7 @@ import ru.job4j.grabber.model.Post;
 
 import java.util.List;
 
-public interface Store extends AutoCloseable{
+public interface Store extends AutoCloseable {
     void save(Post post);
 
     List<Post> getAll();

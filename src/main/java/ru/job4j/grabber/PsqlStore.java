@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class PsqlStore implements Store{
+public class PsqlStore implements Store {
     private final Connection cnn;
 
     public PsqlStore(Properties cfg) {
@@ -27,11 +27,12 @@ public class PsqlStore implements Store{
             throw new IllegalStateException(e);
         }
     }
+
     @Override
     public void save(Post post) {
         try (PreparedStatement ps = cnn.prepareStatement(
-                "insert into post (name, text, link, created) " +
-                        "values (?, ?, ?, ?) on conflict (link) do nothing")) {
+                "insert into post (name, text, link, created) "
+                        + "values (?, ?, ?, ?) on conflict (link) do nothing")) {
             ps.setString(1, post.getTitle());
             ps.setString(2, post.getDescription());
             ps.setString(3, post.getLink());

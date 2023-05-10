@@ -7,14 +7,23 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import ru.job4j.grabber.model.Post;
+import ru.job4j.grabber.utils.DateTimeParser;
 import ru.job4j.grabber.utils.HabrCareerDateTimeParser;
 
-public class HabrCareerParse {
+public class HabrCareerParse implements Parse {
 
     private static final String SOURCE_LINK = "https://career.habr.com";
     private static final String PAGE_LINK = String.format("%s/vacancies/java_developer?page=", SOURCE_LINK);
+    private DateTimeParser dateTimeParser;
+
+    public HabrCareerParse(DateTimeParser dateTimeParser) {
+        this.dateTimeParser = dateTimeParser;
+    }
 
     public static void main(String[] args) throws IOException {
         HabrCareerDateTimeParser habrCareerDateTimeParser = new HabrCareerDateTimeParser();
@@ -39,6 +48,14 @@ public class HabrCareerParse {
         Document document = Jsoup.connect(link).get();
         Element description = document.selectFirst(".style-ugc");
         return description.text();
+    }
+
+    @Override
+    public List<Post> list(String link) {
+        List<Post> posts = new ArrayList<>();
+
+
+        return posts;
     }
 }
 
